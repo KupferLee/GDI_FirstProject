@@ -36,7 +36,7 @@ int main() {
             DrawTexture(myTexture, 10, 100, WHITE);
             DrawTexture(secondTexture, 250, 150, WHITE);
             DrawText("I changed this!", 10, 350, 30, SKYBLUE);
-            DrawText("I added this for Github", 10, 450, 30, SKYBLUE);
+            DrawText("I added this for Github", 10, 400, 30, SKYBLUE);
 
         EndDrawing();
     } // Main game loop end
