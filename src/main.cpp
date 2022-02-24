@@ -17,7 +17,8 @@ int main() {
     // Your own initialization code here
     // ...
     // ...
-    Texture2D myTexture = LoadTexture("assets/graphics/testimage.png");
+    Texture2D myTexture = LoadTexture("assets/graphics/pixelRick.png");
+    Texture2D secondTexture = LoadTexture("assets/graphics/testimage.png");
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -31,8 +32,11 @@ int main() {
             // ...
             // ...
             ClearBackground(RAYWHITE);
-            DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
+            DrawText("Hello, world!", 10, 10, 30, SKYBLUE);
             DrawTexture(myTexture, 10, 100, WHITE);
+            DrawTexture(secondTexture, 250, 150, WHITE);
+            DrawText("I changed this!", 10, 350, 30, SKYBLUE);
+            DrawText("I added this for Github", 10, 450, 30, SKYBLUE);
 
         EndDrawing();
     } // Main game loop end
