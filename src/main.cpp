@@ -31,12 +31,15 @@ int main() {
     Texture2D myTexture = LoadTexture("assets/graphics/pixelRick.png");
     Texture2D secondTexture = LoadTexture("assets/graphics/Steve_Gamma.png");
 
-    position.x = 250;
-    position.y = 150;
-    movementSpeed = 5;
-    framesCounter = 0;
     screenW = 960;
     screenH = 540;
+    movementSpeed = 5;
+    framesCounter = 0;
+
+    position.x = 350;
+    position.y = 100;
+    
+    
 
     GameScreen currentScreen = LOGO;
     
@@ -58,7 +61,7 @@ int main() {
         */
 
         switch (currentScreen) {
-
+            
             case LOGO:
             {
                 //TO DO: update frames variables here
@@ -76,7 +79,7 @@ int main() {
                 // TODO: Update TITLE screen variables here!
 
                 // Press enter to change to GAMEPLAY screen
-                if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(KEY_TAB))
+                if (IsKeyPressed(KEY_ENTER))
                 {
                     currentScreen = GAMEPLAY;
                 }
@@ -87,7 +90,7 @@ int main() {
                 // TODO: Update GAMEPLAY screen variables here!
 
                 // Press enter to change to ENDING screen
-                if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(KEY_TAB))
+                if (IsKeyPressed(KEY_ENTER))
                 {
                     currentScreen = ENDING;
                 }
@@ -116,7 +119,7 @@ int main() {
                 // TODO: Update ENDING screen variables here!
 
                 // Press enter to return to TITLE screen
-                if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
+                if (IsKeyPressed(KEY_ENTER))
                 {
                     currentScreen = TITLE;
                 }
@@ -138,20 +141,20 @@ int main() {
             
             switch (currentScreen)
             {
-
+                
                 case LOGO:
                 {
                     //Draw LOGO screen here!
                     DrawText("LOGO SCREEN", 20, 20, 40, LIGHTGRAY);
                     DrawText("WAIT for 2 SECONDS...", 290, 220, 20, GRAY);
 
-                } break;
+                } break;       
                 case TITLE:
                 {
                     //Draw TITLE screen here!
                     DrawRectangle(0, 0, screenW, screenH, GREEN);
                     DrawText("TITLE SCREEN", 20, 20, 40, DARKGREEN);
-                    DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
+                    DrawText("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
 
                 } break;
                 case GAMEPLAY:
@@ -172,7 +175,7 @@ int main() {
                     // TODO: Draw ENDING screen here!
                     DrawRectangle(0, 0, screenW, screenH, YELLOW);
                     DrawText("ENDING SCREEN", 20, 20, 40, ORANGE);
-                    DrawText("PRESS ENTER or TAP to RETURN to TITLE SCREEN", 120, 220, 20, ORANGE);
+                    DrawText("PRESS ENTER to RETURN to TITLE SCREEN", 120, 220, 20, ORANGE);
                 } break;
                 default: break;
             }
