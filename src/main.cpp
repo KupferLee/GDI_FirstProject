@@ -31,8 +31,7 @@ int main() {
     Texture2D rickTexture = LoadTexture("assets/graphics/pixelRick.png");
     Texture2D steveTexture = LoadTexture("assets/graphics/Steve_Gamma.png");
 
-    screenW = 960;
-    screenH = 540;
+   
     movementSpeed = 5;
     framesCounter = 0;
 
@@ -52,13 +51,31 @@ int main() {
         // ...
         
        
-        //tracking if circle touches the edges of the screen
+        //tracking if steve touches the edges of the screen
        /*
        if (position.x <= 960 || position.x >= 0)
         {
             position.x * -1;
         }
         */
+
+        //ping pong
+        /*
+        //change direction if hit a wall
+        if (position.x >= Game::ScreenWidth - steveTexture.width || position.x <= 0)
+        {
+            movementSpeed = movementSpeed * -1;
+        }
+
+        //position changes with movement speed
+        position.x += movementSpeed;
+        */
+
+        //bildschirmbegrenzung
+        if (position.x >= Game::ScreenWidth - steveTexture.width || position.x <= 0)
+        {
+        
+        }
 
         switch (currentScreen) {
             
@@ -96,22 +113,27 @@ int main() {
                 }
 
                 //press W A S D to move
-                if (IsKeyDown(KEY_D))
+                //if d and right border isnt touched
+                if (IsKeyDown(KEY_D) && position.x <= Game::ScreenWidth - steveTexture.width)
                 {
                     position.x += movementSpeed; //cirlce slowly goes right
                 }
-                else if (IsKeyDown(KEY_A))
+                //if a and left border ist touched
+                else if (IsKeyDown(KEY_A) && position.x >= 0)
                 {
                     position.x -= movementSpeed; //circle goes left
                 }
-                else if (IsKeyDown(KEY_W))
+                //if w and upper border isnt touched
+                else if (IsKeyDown(KEY_W) && position.y >= 0)
                 {
                     position.y -= movementSpeed; //circle goes up
                 }
-                else if (IsKeyDown(KEY_S))
+                //if s and lower border isnt touched
+                else if (IsKeyDown(KEY_S) && position.y <= Game::ScreenHeight - steveTexture.height)
                 {
                     position.y += movementSpeed; //circle goes down
                 }
+                
 
             } break;
             case ENDING:
@@ -147,28 +169,28 @@ int main() {
                 case LOGO:
                 {
                     //Draw LOGO screen here!
-                    DrawRectangle(0, 0, screenW, screenH, LIGHTGRAY);
+                    DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, LIGHTGRAY);
                     DrawText("LOGO SCREEN", 20, 20, 40, GRAY);
-                    DrawText("WAIT for 2 SECONDS...", 290, 220, 20, GRAY);
+                    DrawText("WAIT for 2 SECONDS...", 370, Game::ScreenHeight /2, 20, GRAY);
 
                 } break;       
                 case TITLE:
                 {
                     //Draw TITLE screen here!
-                    DrawRectangle(0, 0, screenW, screenH, GREEN);
+                    DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, GREEN);
                     DrawText("TITLE SCREEN", 20, 20, 40, DARKGREEN);
-                    DrawText("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
+                    DrawText("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 240, Game::ScreenHeight /2, 20, DARKGREEN);
 
                 } break;
                 case GAMEPLAY:
                 {
                     //Draw Game Screen here
-                    DrawRectangle(0, 0, screenW, screenH, SKYBLUE);
-                    DrawText("Hello, world!", 10, 10, 30, DARKBLUE);
-                    DrawTexture(rickTexture, 10, 100, WHITE);
+                    //order equals order of layers
+                    DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, SKYBLUE);
+                    //DrawTexture(rickTexture, 10, 100, WHITE);
                     DrawTextureV(steveTexture, position, WHITE);
-                    DrawText("I changed this!", 10, 350, 30, DARKBLUE);
-                    DrawText("I added this for Github", 10, 400, 30, DARKBLUE);
+                    DrawText("TITLE SCREEN", 20, 20, 40, DARKBLUE);
+                    DrawText("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 240, 500, 20, DARKBLUE);
 
                     //TO DO: flip Steve vertically when moved with A/D
 
@@ -176,9 +198,9 @@ int main() {
                 case ENDING:
                 {
                     // TODO: Draw ENDING screen here!
-                    DrawRectangle(0, 0, screenW, screenH, YELLOW);
+                    DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, YELLOW);
                     DrawText("ENDING SCREEN", 20, 20, 40, ORANGE);
-                    DrawText("PRESS ENTER to RETURN to TITLE SCREEN", 120, 220, 20, ORANGE);
+                    DrawText("PRESS ENTER to RETURN to TITLE SCREEN", 240, Game::ScreenHeight/2, 20, ORANGE);
                 } break;
                 default: break;
             }
