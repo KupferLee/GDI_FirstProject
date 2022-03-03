@@ -5,7 +5,7 @@
 #include "config.h"
 
 
-
+//initialization within main()
 int main() {
     // Raylib initialization
     // Project name, screen size, fullscreen mode etc. can be specified in the config.h.in file
@@ -28,8 +28,8 @@ int main() {
     // Your own initialization code here
     // ...
     // ...
-    Texture2D myTexture = LoadTexture("assets/graphics/pixelRick.png");
-    Texture2D secondTexture = LoadTexture("assets/graphics/Steve_Gamma.png");
+    Texture2D rickTexture = LoadTexture("assets/graphics/pixelRick.png");
+    Texture2D steveTexture = LoadTexture("assets/graphics/Steve_Gamma.png");
 
     screenW = 960;
     screenH = 540;
@@ -165,8 +165,8 @@ int main() {
                     //Draw Game Screen here
                     DrawRectangle(0, 0, screenW, screenH, SKYBLUE);
                     DrawText("Hello, world!", 10, 10, 30, DARKBLUE);
-                    DrawTexture(myTexture, 10, 100, WHITE);
-                    DrawTextureV(secondTexture, position, WHITE);
+                    DrawTexture(rickTexture, 10, 100, WHITE);
+                    DrawTextureV(steveTexture, position, WHITE);
                     DrawText("I changed this!", 10, 350, 30, DARKBLUE);
                     DrawText("I added this for Github", 10, 400, 30, DARKBLUE);
 
@@ -189,7 +189,7 @@ int main() {
     // De-initialization here
     // ...
     // ...
-    UnloadTexture(myTexture);
+    UnloadTexture(rickTexture);
 
     // Close window and OpenGL context
     CloseWindow();
