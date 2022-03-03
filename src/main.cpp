@@ -157,19 +157,19 @@ int main() {
                 case GAMEPLAY:
                 {
                     //Draw Game Screen here
-                    ClearBackground(RAYWHITE);
-                    DrawText("Hello, world!", 10, 10, 30, SKYBLUE);
+                    DrawRectangle(0, 0, screenW, screenH, SKYBLUE);
+                    DrawText("Hello, world!", 10, 10, 30, DARKBLUE);
                     DrawTexture(myTexture, 10, 100, WHITE);
                     DrawTextureV(secondTexture, position, WHITE);
-                    DrawText("I changed this!", 10, 350, 30, SKYBLUE);
-                    DrawText("I added this for Github", 10, 400, 30, SKYBLUE);
+                    DrawText("I changed this!", 10, 350, 30, DARKBLUE);
+                    DrawText("I added this for Github", 10, 400, 30, DARKBLUE);
                 } break;
                 case ENDING:
                 {
                     // TODO: Draw ENDING screen here!
-                    DrawRectangle(0, 0, screenW, screenH, BLUE);
-                    DrawText("ENDING SCREEN", 20, 20, 40, DARKBLUE);
-                    DrawText("PRESS ENTER or TAP to RETURN to TITLE SCREEN", 120, 220, 20, DARKBLUE);
+                    DrawRectangle(0, 0, screenW, screenH, YELLOW);
+                    DrawText("ENDING SCREEN", 20, 20, 40, ORANGE);
+                    DrawText("PRESS ENTER or TAP to RETURN to TITLE SCREEN", 120, 220, 20, ORANGE);
                 } break;
                 default: break;
             }
