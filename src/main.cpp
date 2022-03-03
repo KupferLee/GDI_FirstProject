@@ -29,7 +29,7 @@ int main() {
     // ...
     // ...
     Texture2D myTexture = LoadTexture("assets/graphics/pixelRick.png");
-    Texture2D secondTexture = LoadTexture("assets/graphics/testimage.png");
+    Texture2D secondTexture = LoadTexture("assets/graphics/Steve_Gamma.png");
 
     position.x = 250;
     position.y = 150;
@@ -141,14 +141,14 @@ int main() {
 
                 case LOGO:
                 {
-                    // TODO: Draw LOGO screen here!
+                    //Draw LOGO screen here!
                     DrawText("LOGO SCREEN", 20, 20, 40, LIGHTGRAY);
                     DrawText("WAIT for 2 SECONDS...", 290, 220, 20, GRAY);
 
                 } break;
                 case TITLE:
                 {
-                    // TODO: Draw TITLE screen here!
+                    //Draw TITLE screen here!
                     DrawRectangle(0, 0, screenW, screenH, GREEN);
                     DrawText("TITLE SCREEN", 20, 20, 40, DARKGREEN);
                     DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
@@ -163,6 +163,9 @@ int main() {
                     DrawTextureV(secondTexture, position, WHITE);
                     DrawText("I changed this!", 10, 350, 30, DARKBLUE);
                     DrawText("I added this for Github", 10, 400, 30, DARKBLUE);
+
+                    //TO DO: flip Steve vertically when moved with A/D
+
                 } break;
                 case ENDING:
                 {
