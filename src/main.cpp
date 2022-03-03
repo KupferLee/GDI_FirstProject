@@ -138,6 +138,8 @@ int main() {
             // You can draw on the screen between BeginDrawing() and EndDrawing()
             // ...
             // ...
+
+        ClearBackground(WHITE);
             
             switch (currentScreen)
             {
@@ -145,7 +147,8 @@ int main() {
                 case LOGO:
                 {
                     //Draw LOGO screen here!
-                    DrawText("LOGO SCREEN", 20, 20, 40, LIGHTGRAY);
+                    DrawRectangle(0, 0, screenW, screenH, LIGHTGRAY);
+                    DrawText("LOGO SCREEN", 20, 20, 40, GRAY);
                     DrawText("WAIT for 2 SECONDS...", 290, 220, 20, GRAY);
 
                 } break;       
