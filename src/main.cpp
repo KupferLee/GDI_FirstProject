@@ -4,6 +4,18 @@
 
 #include "config.h"
 
+//method to init a circle that bounces off the edges
+void InitCircle(Texture2D texture, int pos_x, int pos_y, int speed)
+{
+    //TO DO: changing position
+}
+
+//method to draw a circle between begin drawing and end drawing
+void DrawCircle(Texture2D texture, int pos_x, int pos_y, Color color)
+{
+    DrawTexture(texture, pos_x, pos_y, color);
+}
+
 
 //initialization within main()
 int main() {
@@ -12,11 +24,14 @@ int main() {
     InitWindow(Game::ScreenWidth, Game::ScreenHeight, Game::PROJECT_NAME);
     SetTargetFPS(60);
 
-    Vector2 position;
+    Vector2 playerPos;
+    Vector2 circlePosV;
     int movementSpeed;
     int framesCounter;
     int screenW;
     int screenH;
+    int circlePos_x;
+    int circlePos_y;
 
     typedef enum GameScreen { LOGO = 0, TITLE, GAMEPLAY, ENDING } Gamescreen;
     
@@ -30,19 +45,23 @@ int main() {
     // ...
     Texture2D rickTexture = LoadTexture("assets/graphics/pixelRick.png");
     Texture2D steveTexture = LoadTexture("assets/graphics/Steve_Gamma.png");
+    Texture2D circleTexture = LoadTexture("assets/graphics/circle.png");
 
    
     movementSpeed = 5;
     framesCounter = 0;
 
-    position.x = 350;
-    position.y = 100;
+    playerPos.x = 350;
+    playerPos.y = 100;
+    circlePosV.x = 10;
+    circlePosV.y = 10;
+    circlePos_x = 200;
+    circlePos_y = 20;
     
     
 
     GameScreen currentScreen = LOGO;
     
-
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
@@ -50,33 +69,24 @@ int main() {
         // ...
         // ...
         
-       
-        //tracking if steve touches the edges of the screen
-       /*
-       if (position.x <= 960 || position.x >= 0)
-        {
-            position.x * -1;
-        }
-        */
+        //Title Screen
 
         //ping pong
-        /*
         //change direction if hit a wall
-        if (position.x >= Game::ScreenWidth - steveTexture.width || position.x <= 0)
+        if (circlePosV.x >= Game::ScreenWidth - circleTexture.width || circlePosV.x <= 0)
+        {
+            movementSpeed = movementSpeed * -1;
+        } else if (circlePosV.y >= Game::ScreenHeight - circleTexture.height || circlePosV.y <= 0)
         {
             movementSpeed = movementSpeed * -1;
         }
-
-        //position changes with movement speed
-        position.x += movementSpeed;
-        */
-
-        //bildschirmbegrenzung
-        if (position.x >= Game::ScreenWidth - steveTexture.width || position.x <= 0)
-        {
         
-        }
+        //position changes with movement speed
+        circlePosV.x += movementSpeed;
+        circlePosV.y += movementSpeed;
 
+
+        //Gameplay Screen
         switch (currentScreen) {
             
             case LOGO:
@@ -100,7 +110,7 @@ int main() {
                 {
                     currentScreen = GAMEPLAY;
                 }
-
+                              
             } break;
             case GAMEPLAY:
             {
@@ -114,24 +124,24 @@ int main() {
 
                 //press W A S D to move
                 //if d and right border isnt touched
-                if (IsKeyDown(KEY_D) && position.x <= Game::ScreenWidth - steveTexture.width)
+                if (IsKeyDown(KEY_D) && playerPos.x <= Game::ScreenWidth - steveTexture.width)
                 {
-                    position.x += movementSpeed; //cirlce slowly goes right
+                    playerPos.x += movementSpeed; //cirlce slowly goes right
                 }
                 //if a and left border ist touched
-                else if (IsKeyDown(KEY_A) && position.x >= 0)
+                else if (IsKeyDown(KEY_A) && playerPos.x >= 0)
                 {
-                    position.x -= movementSpeed; //circle goes left
+                    playerPos.x -= movementSpeed; //circle goes left
                 }
                 //if w and upper border isnt touched
-                else if (IsKeyDown(KEY_W) && position.y >= 0)
+                else if (IsKeyDown(KEY_W) && playerPos.y >= 0)
                 {
-                    position.y -= movementSpeed; //circle goes up
+                    playerPos.y -= movementSpeed; //circle goes up
                 }
                 //if s and lower border isnt touched
-                else if (IsKeyDown(KEY_S) && position.y <= Game::ScreenHeight - steveTexture.height)
+                else if (IsKeyDown(KEY_S) && playerPos.y <= Game::ScreenHeight - steveTexture.height)
                 {
-                    position.y += movementSpeed; //circle goes down
+                    playerPos.y += movementSpeed; //circle goes down
                 }
                 
 
@@ -180,6 +190,10 @@ int main() {
                     DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, GREEN);
                     DrawText("TITLE SCREEN", 20, 20, 40, DARKGREEN);
                     DrawText("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 240, Game::ScreenHeight /2, 20, DARKGREEN);
+                    DrawTextureV(circleTexture, circlePosV, BLUE);
+                    DrawCircle(circleTexture, circlePos_x, circlePos_y, RED);
+                    DrawCircle(circleTexture, 500, 300, YELLOW);
+                    
 
                 } break;
                 case GAMEPLAY:
@@ -188,10 +202,13 @@ int main() {
                     //order equals order of layers
                     DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, SKYBLUE);
                     //DrawTexture(rickTexture, 10, 100, WHITE);
-                    DrawTextureV(steveTexture, position, WHITE);
-                    DrawText("TITLE SCREEN", 20, 20, 40, DARKBLUE);
+                    DrawText("GAMEPLAY SCREEN", 20, 20, 40, DARKBLUE);
                     DrawText("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 240, 500, 20, DARKBLUE);
+                    DrawTextureV(steveTexture, playerPos, WHITE);
+                    
 
+                    //TO DO: if wasd is pressed delete text
+                    
                     //TO DO: flip Steve vertically when moved with A/D
 
                 } break;

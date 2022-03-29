@@ -1,3 +1,8 @@
+
+This is a simple repo to test out and learn for university.
+
+To get the setup see here:
+
 ```
                 | (_) |       | |           | |           
  _ __ __ _ _   _| |_| |__  ___| |_ __ _ _ __| |_ ___ _ __ 
