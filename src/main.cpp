@@ -6,19 +6,6 @@
 #include "player.h"
 
 
-//method to init a circle that bounces off the edges
-void InitCircle(Texture2D texture, int pos_x, int pos_y, int speed)
-{
-    //TO DO: changing position
-}
-
-//method to draw a circle between begin drawing and end drawing
-void DrawCircle(Texture2D texture, int pos_x, int pos_y, Color color)
-{
-    DrawTexture(texture, pos_x, pos_y, color);
-}
-
-
 //initialization within main()
 int main() {
     // Raylib initialization
@@ -40,45 +27,10 @@ int main() {
     // ...
     player* this_player = new player;
 
-    /*
-    Texture2D rickTexture = LoadTexture("assets/graphics/pixelRick.png");
-    Texture2D player_texture = LoadTexture("assets/graphics/player.png");
-    Texture2D circleTexture = LoadTexture("assets/graphics/circle.png");
-    Texture2D foxTexture16 = LoadTexture("assets/graphics/Fox_Spirit16.png");
-    Texture2D foxTexture32 = LoadTexture("assets/graphics/Fox_Spirit32.png");
+    Texture2D background = LoadTexture("assets/graphics/map_test.png");
 
-    Vector2 playerPos;
-    Vector2 circlePosV;
-    int movementSpeed;
-    int playerSpeed;
-    
-    int screenW;
-    int screenH;
-    int circlePos_x;
-    int circlePos_y;
-    */
-
-    //movementSpeed = 5;
-    //playerSpeed = 5;
     int framesCounter = 0;
-
-    /*
-    playerPos.x = 350;
-    playerPos.y = 100;
-    circlePosV.x = 10;
-    circlePosV.y = 10;
-    circlePos_x = 200;
-    circlePos_y = 20;
-    */
-
-    //Sprite spRick(450, 200, LoadTexture("assets/graphics/pixelRick.png"));
-    
-    //Sprite spRick;
-    //spRick.pos_y = 40;
-    //spRick.pos_y = 20;
-    //spRick.texture = LoadTexture("assets/graphics/pixelRick.png");
-    
-    
+      
     //sets default to screen whith which the game shall start when being executed
     GameScreen currentScreen = LOGO;
 
@@ -93,28 +45,6 @@ int main() {
         // ...
         
 
-        //TITLE screen
-        //ping pong
-        //change direction if hit a wall
-        /*
-        if (circlePosV.x >= Game::ScreenWidth - circleTexture.width || circlePosV.x <= 0)
-        {
-            movementSpeed = movementSpeed * -1;
-        }
-        else if (circlePosV.y >= Game::ScreenHeight - circleTexture.height || circlePosV.y <= 0)
-        {
-            movementSpeed = movementSpeed * -1;
-        }
-        */
-
-        
-        
-        //position changes with movement speed
-        //circlePosV.x += movementSpeed;
-        //circlePosV.y += movementSpeed;
-
-
-        //Gameplay Screen
         switch (currentScreen) {
             
             case LOGO:
@@ -145,8 +75,6 @@ int main() {
             } break;
             case GAMEPLAY:
             {
-                // TODO: Update GAMEPLAY screen variables here!
-
                 // Press enter to change to ENDING screen
                 if (IsKeyPressed(KEY_ENTER))
                 {
@@ -154,29 +82,6 @@ int main() {
                 }
 
                 this_player->update();
-                /*
-                //press W A S D to move
-                //if d and right border isnt touched
-                if (IsKeyDown(KEY_D) && playerPos.x <= Game::ScreenWidth - player_texture.width)
-                {
-                    playerPos.x += playerSpeed; //cirlce slowly goes right
-                }
-                //if a and left border ist touched
-                else if (IsKeyDown(KEY_A) && playerPos.x >= 0)
-                {
-                    playerPos.x -= playerSpeed; //circle goes left
-                }
-                //if w and upper border isnt touched
-                else if (IsKeyDown(KEY_W) && playerPos.y >= 0)
-                {
-                    playerPos.y -= playerSpeed; //circle goes up
-                }
-                //if s and lower border isnt touched
-                else if (IsKeyDown(KEY_S) && playerPos.y <= Game::ScreenHeight - player_texture.height)
-                {
-                    playerPos.y += playerSpeed; //circle goes down
-                }
-                */
                 
 
             } break;
@@ -194,11 +99,6 @@ int main() {
             default: break;
 
         }
-
-      
-
-        //collision mit bildschirmrand abfragen
-        //wenn collision dann movement speed auf 0
 
         BeginDrawing();
             // You can draw on the screen between BeginDrawing() and EndDrawing()
@@ -225,8 +125,6 @@ int main() {
                     DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, GREEN);
                     DrawText("TITLE SCREEN", 20, 20, 40, DARKGREEN);
                     DrawText("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 240, 500, 20, DARKGREEN);
-                    //DrawTextureV(circleTexture, circlePosV, BLUE);
-                    //spRick.Draw();
 
                 } break;
                 case GAMEPLAY:
@@ -234,17 +132,12 @@ int main() {
                     //Draw Game Screen here
                     //order equals order of layers
                     DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, YELLOW);
-                    //DrawTexture(rickTexture, 10, 100, WHITE);
                     DrawText("GAMEPLAY SCREEN", 20, 20, 40, ORANGE);
-                    //DrawTexture(foxTexture16, 400, 200, WHITE);
-                    //DrawTexture(foxTexture32, 40, 60, WHITE);
                     DrawText("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 240, 500, 20, ORANGE);
-                    //DrawTextureV(player_texture, playerPos, WHITE);
+
+                    DrawTexture(background, 0, 0, WHITE);
                     this_player->draw();
                     
-                    //TO DO: if wasd is pressed delete text
-                    
-                    //TO DO: flip Steve vertically when moved with A/D
 
                 } break;
                 case ENDING:
@@ -263,7 +156,6 @@ int main() {
     // De-initialization here
     // ...
     // ...
-    //UnloadTexture(player_texture);
 
     // Close window and OpenGL context
     CloseWindow();

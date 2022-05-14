@@ -1,4 +1,5 @@
 #include "player.h"
+#include "map.h"
 
 player::player()
 {
@@ -6,7 +7,8 @@ player::player()
 	//this->position.x = Game::ScreenWidth / 2 - this->texture.width / 2;
     this->position.x = 20;
     this->position.y = 20;
-    this->movement_speed = 5;
+    this->movement_speed = 2;
+
 }
 
 player::~player()
@@ -16,26 +18,33 @@ player::~player()
 
 void player::update()
 {
+    //movement
+    // 
     //press W A S D to move
-                //if d and right border isnt touched
-    if (IsKeyDown(KEY_D) && this->position.x <= Game::ScreenWidth - this->texture.width)
+    //stop at borders
+    // 
+    //right
+    if (IsKeyDown(KEY_D) && this->position.x <= Game::ScreenWidth - this->texture.width - this->texture.width)
     {
-        this->position.x += this->movement_speed; //cirlce slowly goes right
+        this->position.x += this->movement_speed;
     }
-    //if a and left border ist touched
-    else if (IsKeyDown(KEY_A) && this->position.x >= 0)
+
+    //left
+    if (IsKeyDown(KEY_A) && this->position.x >= 0)
     {
-        this->position.x -= this->movement_speed; //circle goes left
+        this->position.x -= this->movement_speed;
     }
-    //if w and upper border isnt touched
-    else if (IsKeyDown(KEY_W) && this->position.y >= 0)
+
+    //up
+    if (IsKeyDown(KEY_W) && this->position.y >= 0)
     {
-        this->position.y -= this->movement_speed; //circle goes up
+        this->position.y -= this->movement_speed;
     }
-    //if s and lower border isnt touched
-    else if (IsKeyDown(KEY_S) && this->position.y <= Game::ScreenHeight - this->texture.height)
+
+    //down
+    if (IsKeyDown(KEY_S) && this->position.y <= Game::ScreenHeight - this->texture.height)
     {
-        this->position.y += this->movement_speed; //circle goes down
+        this->position.y += this->movement_speed;
     }
 }
 
