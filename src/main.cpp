@@ -1,8 +1,10 @@
 ﻿#include <cstdlib>
-
 #include "raylib.h"
-
 #include "config.h"
+
+#include "sprite.h"
+#include "player.h"
+
 
 //method to init a circle that bounces off the edges
 void InitCircle(Texture2D texture, int pos_x, int pos_y, int speed)
@@ -24,14 +26,7 @@ int main() {
     InitWindow(Game::ScreenWidth, Game::ScreenHeight, Game::PROJECT_NAME);
     SetTargetFPS(60);
 
-    Vector2 playerPos;
-    Vector2 circlePosV;
-    int movementSpeed;
-    int framesCounter;
-    int screenW;
-    int screenH;
-    int circlePos_x;
-    int circlePos_y;
+    
 
     typedef enum GameScreen { LOGO = 0, TITLE, GAMEPLAY, ENDING } Gamescreen;
     
@@ -43,24 +38,52 @@ int main() {
     // Your own initialization code here
     // ...
     // ...
+    player* this_player = new player;
+
+    /*
     Texture2D rickTexture = LoadTexture("assets/graphics/pixelRick.png");
-    Texture2D steveTexture = LoadTexture("assets/graphics/Steve_Gamma.png");
+    Texture2D player_texture = LoadTexture("assets/graphics/player.png");
     Texture2D circleTexture = LoadTexture("assets/graphics/circle.png");
+    Texture2D foxTexture16 = LoadTexture("assets/graphics/Fox_Spirit16.png");
+    Texture2D foxTexture32 = LoadTexture("assets/graphics/Fox_Spirit32.png");
 
-   
-    movementSpeed = 5;
-    framesCounter = 0;
+    Vector2 playerPos;
+    Vector2 circlePosV;
+    int movementSpeed;
+    int playerSpeed;
+    
+    int screenW;
+    int screenH;
+    int circlePos_x;
+    int circlePos_y;
+    */
 
+    //movementSpeed = 5;
+    //playerSpeed = 5;
+    int framesCounter = 0;
+
+    /*
     playerPos.x = 350;
     playerPos.y = 100;
     circlePosV.x = 10;
     circlePosV.y = 10;
     circlePos_x = 200;
     circlePos_y = 20;
-    
-    
+    */
 
+    //Sprite spRick(450, 200, LoadTexture("assets/graphics/pixelRick.png"));
+    
+    //Sprite spRick;
+    //spRick.pos_y = 40;
+    //spRick.pos_y = 20;
+    //spRick.texture = LoadTexture("assets/graphics/pixelRick.png");
+    
+    
+    //sets default to screen whith which the game shall start when being executed
     GameScreen currentScreen = LOGO;
+
+    //Frames Per Second are kept to 60 frames per second
+    SetTargetFPS(60);
     
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -69,21 +92,26 @@ int main() {
         // ...
         // ...
         
-        //Title Screen
 
+        //TITLE screen
         //ping pong
         //change direction if hit a wall
+        /*
         if (circlePosV.x >= Game::ScreenWidth - circleTexture.width || circlePosV.x <= 0)
         {
             movementSpeed = movementSpeed * -1;
-        } else if (circlePosV.y >= Game::ScreenHeight - circleTexture.height || circlePosV.y <= 0)
+        }
+        else if (circlePosV.y >= Game::ScreenHeight - circleTexture.height || circlePosV.y <= 0)
         {
             movementSpeed = movementSpeed * -1;
         }
+        */
+
+        
         
         //position changes with movement speed
-        circlePosV.x += movementSpeed;
-        circlePosV.y += movementSpeed;
+        //circlePosV.x += movementSpeed;
+        //circlePosV.y += movementSpeed;
 
 
         //Gameplay Screen
@@ -91,7 +119,7 @@ int main() {
             
             case LOGO:
             {
-                //TO DO: update frames variables here
+                //update frames variables here
 
                 framesCounter++;
 
@@ -100,6 +128,8 @@ int main() {
                 {
                     currentScreen = TITLE;
                 }
+
+
             } break;
             case TITLE:
             {
@@ -110,6 +140,7 @@ int main() {
                 {
                     currentScreen = GAMEPLAY;
                 }
+
                               
             } break;
             case GAMEPLAY:
@@ -122,27 +153,30 @@ int main() {
                     currentScreen = ENDING;
                 }
 
+                this_player->update();
+                /*
                 //press W A S D to move
                 //if d and right border isnt touched
-                if (IsKeyDown(KEY_D) && playerPos.x <= Game::ScreenWidth - steveTexture.width)
+                if (IsKeyDown(KEY_D) && playerPos.x <= Game::ScreenWidth - player_texture.width)
                 {
-                    playerPos.x += movementSpeed; //cirlce slowly goes right
+                    playerPos.x += playerSpeed; //cirlce slowly goes right
                 }
                 //if a and left border ist touched
                 else if (IsKeyDown(KEY_A) && playerPos.x >= 0)
                 {
-                    playerPos.x -= movementSpeed; //circle goes left
+                    playerPos.x -= playerSpeed; //circle goes left
                 }
                 //if w and upper border isnt touched
                 else if (IsKeyDown(KEY_W) && playerPos.y >= 0)
                 {
-                    playerPos.y -= movementSpeed; //circle goes up
+                    playerPos.y -= playerSpeed; //circle goes up
                 }
                 //if s and lower border isnt touched
-                else if (IsKeyDown(KEY_S) && playerPos.y <= Game::ScreenHeight - steveTexture.height)
+                else if (IsKeyDown(KEY_S) && playerPos.y <= Game::ScreenHeight - player_texture.height)
                 {
-                    playerPos.y += movementSpeed; //circle goes down
+                    playerPos.y += playerSpeed; //circle goes down
                 }
+                */
                 
 
             } break;
@@ -182,6 +216,7 @@ int main() {
                     DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, LIGHTGRAY);
                     DrawText("LOGO SCREEN", 20, 20, 40, GRAY);
                     DrawText("WAIT for 2 SECONDS...", 370, Game::ScreenHeight /2, 20, GRAY);
+                    
 
                 } break;       
                 case TITLE:
@@ -189,24 +224,24 @@ int main() {
                     //Draw TITLE screen here!
                     DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, GREEN);
                     DrawText("TITLE SCREEN", 20, 20, 40, DARKGREEN);
-                    DrawText("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 240, Game::ScreenHeight /2, 20, DARKGREEN);
-                    DrawTextureV(circleTexture, circlePosV, BLUE);
-                    DrawCircle(circleTexture, circlePos_x, circlePos_y, RED);
-                    DrawCircle(circleTexture, 500, 300, YELLOW);
-                    
+                    DrawText("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 240, 500, 20, DARKGREEN);
+                    //DrawTextureV(circleTexture, circlePosV, BLUE);
+                    //spRick.Draw();
 
                 } break;
                 case GAMEPLAY:
                 {
                     //Draw Game Screen here
                     //order equals order of layers
-                    DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, SKYBLUE);
+                    DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, YELLOW);
                     //DrawTexture(rickTexture, 10, 100, WHITE);
-                    DrawText("GAMEPLAY SCREEN", 20, 20, 40, DARKBLUE);
-                    DrawText("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 240, 500, 20, DARKBLUE);
-                    DrawTextureV(steveTexture, playerPos, WHITE);
+                    DrawText("GAMEPLAY SCREEN", 20, 20, 40, ORANGE);
+                    //DrawTexture(foxTexture16, 400, 200, WHITE);
+                    //DrawTexture(foxTexture32, 40, 60, WHITE);
+                    DrawText("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 240, 500, 20, ORANGE);
+                    //DrawTextureV(player_texture, playerPos, WHITE);
+                    this_player->draw();
                     
-
                     //TO DO: if wasd is pressed delete text
                     
                     //TO DO: flip Steve vertically when moved with A/D
@@ -215,9 +250,9 @@ int main() {
                 case ENDING:
                 {
                     // TODO: Draw ENDING screen here!
-                    DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, YELLOW);
-                    DrawText("ENDING SCREEN", 20, 20, 40, ORANGE);
-                    DrawText("PRESS ENTER to RETURN to TITLE SCREEN", 240, Game::ScreenHeight/2, 20, ORANGE);
+                    DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, RED);
+                    DrawText("ENDING SCREEN", 20, 20, 40, BLACK);
+                    DrawText("PRESS ENTER to RETURN to TITLE SCREEN", 240, 500, 20, BLACK);
                 } break;
                 default: break;
             }
@@ -228,7 +263,7 @@ int main() {
     // De-initialization here
     // ...
     // ...
-    UnloadTexture(rickTexture);
+    //UnloadTexture(player_texture);
 
     // Close window and OpenGL context
     CloseWindow();
