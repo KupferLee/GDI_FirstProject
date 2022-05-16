@@ -8,8 +8,8 @@ player::player(map* current_map) : current_map(current_map)
 	this->texture = LoadTextureFromImage(this->image);
 
 	//this->position.x = Game::ScreenWidth / 2 - this->texture.width / 2;
-    this->position.x = 90;
-    this->position.y = 80;
+    this->position.x = current_map->player_start_pos.x - 80;
+    this->position.y = current_map->player_start_pos.y- 1700;
 
 }
 

@@ -11,7 +11,7 @@ public:
 	Vector2 position;
 	Image image;
 
-	int movement_speed = 3;
+	int movement_speed = 5;
 	int scale_factor = 4;
 
 	//later

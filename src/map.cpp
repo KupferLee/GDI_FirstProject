@@ -8,6 +8,9 @@ map::map()
 	this->texture = LoadTextureFromImage(this->image);
 	this->position.x = 0;
 	this->position.y = 0;
+
+	this->player_start_pos.x = this->texture.width - 50;
+	this->player_start_pos.y = this->texture.height - 30;
 }
 
 map::~map()

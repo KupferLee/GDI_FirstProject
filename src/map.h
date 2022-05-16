@@ -11,4 +11,6 @@ public:
 	Image image;
 	Texture2D texture;
 	Vector2 position;
+
+	Vector2 player_start_pos;
 };

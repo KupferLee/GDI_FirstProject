@@ -33,7 +33,7 @@ int main() {
     player* this_player = new player(this_map);
     
     this_camera->target = this_player->position;
-    this_camera->offset = Vector2 {Game::ScreenWidth / 2.0f, Game::ScreenHeight / 2.0f};
+    this_camera->offset = Vector2 {Game::ScreenWidth / 2.0f - this_player->texture.width/2, Game::ScreenHeight / 2.0f - this_player->texture.height/2};
     this_camera->zoom = 1.0f;
     this_camera->rotation = 1.0f;
 
