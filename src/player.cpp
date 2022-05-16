@@ -4,7 +4,7 @@
 player::player()
 {
     this->image = LoadImage("assets/graphics/player.png");
-    ImageResizeNN(&this->image, this->image.width * actor::scale_factor, this->image.height * 3);
+    ImageResizeNN(&this->image, this->image.width * scale_factor, this->image.height * scale_factor);
 	this->texture = LoadTextureFromImage(this->image);
 
 	//this->position.x = Game::ScreenWidth / 2 - this->texture.width / 2;

@@ -2,6 +2,8 @@
 #include "raylib.h"
 #include "config.h"
 
+#include "raymath.h"
+
 #include "sprite.h"
 #include "player.h"
 #include "map.h"
@@ -26,8 +28,14 @@ int main() {
     // Your own initialization code here
     // ...
     // ...
+    Camera2D* this_camera = new Camera2D;
     player* this_player = new player;
     map* this_map = new map;
+
+    this_camera->target = this_player->position;
+    this_camera->offset = Vector2 {Game::ScreenWidth / 2.0f, Game::ScreenHeight / 2.0f};
+    this_camera->zoom = 1.0f;
+    this_camera->rotation = 1.0f;
 
     int framesCounter = 0;
       
@@ -36,6 +44,11 @@ int main() {
 
     //Frames Per Second are kept to 60 frames per second
     SetTargetFPS(60);
+
+
+
+    //void UpdateCameraCenter(Camera2D* camera, Player* player, EnvItem* envItems, int envItemsLength, float delta, int width, int height);
+
     
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -81,6 +94,7 @@ int main() {
                     currentScreen = ENDING;
                 }
 
+                this_camera->target = this_player->position;
                 this_player->update();
                 
 
@@ -99,6 +113,9 @@ int main() {
             default: break;
 
         }
+
+
+
 
         BeginDrawing();
             // You can draw on the screen between BeginDrawing() and EndDrawing()
@@ -129,14 +146,20 @@ int main() {
                 } break;
                 case GAMEPLAY:
                 {
+                    //BeginMode2D(*camera);
                     //Draw Game Screen here
                     //order equals order of layers
                     DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, YELLOW);
                     DrawText("GAMEPLAY SCREEN", 20, 20, 40, ORANGE);
                     DrawText("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 240, 500, 20, ORANGE);
 
+                  
+
+                    BeginMode2D(*this_camera);
                     DrawTexture(this_map->texture, 0, 0, WHITE);
                     this_player->draw();
+                    EndMode2D();
+                    //EndMode2D();
                     
 
                 } break;
