@@ -1,7 +1,7 @@
 #include "player.h"
 #include "map.h"
 
-player::player()
+player::player(map* current_map) : current_map(current_map)
 {
     this->image = LoadImage("assets/graphics/player.png");
     ImageResizeNN(&this->image, this->image.width * scale_factor, this->image.height * scale_factor);
@@ -26,7 +26,7 @@ void player::update()
     //stop at borders
     // 
     //right
-    if (IsKeyDown(KEY_D) && this->position.x <= Game::ScreenWidth - this->texture.width - this->texture.width)
+    if (IsKeyDown(KEY_D) && this->position.x <= player::current_map->texture.width - this->texture.width)
     {
         this->position.x += this->movement_speed;
     }
@@ -44,7 +44,7 @@ void player::update()
     }
 
     //down
-    if (IsKeyDown(KEY_S) && this->position.y <= Game::ScreenHeight - this->texture.height)
+    if (IsKeyDown(KEY_S) && this->position.y <= player::current_map->texture.height - this->texture.height)
     {
         this->position.y += this->movement_speed;
     }

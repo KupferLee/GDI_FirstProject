@@ -29,9 +29,9 @@ int main() {
     // ...
     // ...
     Camera2D* this_camera = new Camera2D;
-    player* this_player = new player;
     map* this_map = new map;
-
+    player* this_player = new player(this_map);
+    
     this_camera->target = this_player->position;
     this_camera->offset = Vector2 {Game::ScreenWidth / 2.0f, Game::ScreenHeight / 2.0f};
     this_camera->zoom = 1.0f;

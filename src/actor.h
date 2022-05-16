@@ -12,7 +12,7 @@ public:
 	Image image;
 
 	int movement_speed = 3;
-	int scale_factor = 3;
+	int scale_factor = 4;
 
 	//later
 	//hp
