@@ -3,11 +3,13 @@
 
 player::player()
 {
-	this->texture = LoadTexture("assets/graphics/player.png");
+    this->image = LoadImage("assets/graphics/player.png");
+    ImageResizeNN(&this->image, this->image.width * actor::scale_factor, this->image.height * 3);
+	this->texture = LoadTextureFromImage(this->image);
+
 	//this->position.x = Game::ScreenWidth / 2 - this->texture.width / 2;
-    this->position.x = 20;
-    this->position.y = 20;
-    this->movement_speed = 2;
+    this->position.x = 90;
+    this->position.y = 80;
 
 }
 

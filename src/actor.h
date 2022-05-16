@@ -7,10 +7,12 @@
 class actor
 {
 public:
-	Vector2 position;
 	Texture2D texture;
+	Vector2 position;
+	Image image;
 
-	int movement_speed;
+	int movement_speed = 3;
+	int scale_factor = 3;
 
 	//later
 	//hp

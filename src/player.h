@@ -2,16 +2,15 @@
 
 #include "actor.h"
 
-class player
+class player : public actor
 {
 public:
 	player();
 	~player();
 	
-	Texture2D texture;
-	Vector2 position;
+	
 
-	int movement_speed;
+	//int movement_speed;
 
 	void update();
 	void draw();

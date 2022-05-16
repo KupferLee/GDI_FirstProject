@@ -2,11 +2,13 @@
 
 #include "actor.h"
 
-class map
+class map : public actor
 {
 public:
 	map();
 	~map();
+
+	Image image;
 	Texture2D texture;
 	Vector2 position;
 };

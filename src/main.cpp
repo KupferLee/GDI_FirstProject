@@ -4,6 +4,7 @@
 
 #include "sprite.h"
 #include "player.h"
+#include "map.h"
 
 
 //initialization within main()
@@ -26,8 +27,7 @@ int main() {
     // ...
     // ...
     player* this_player = new player;
-
-    Texture2D background = LoadTexture("assets/graphics/map_test.png");
+    map* this_map = new map;
 
     int framesCounter = 0;
       
@@ -135,7 +135,7 @@ int main() {
                     DrawText("GAMEPLAY SCREEN", 20, 20, 40, ORANGE);
                     DrawText("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 240, 500, 20, ORANGE);
 
-                    DrawTexture(background, 0, 0, WHITE);
+                    DrawTexture(this_map->texture, 0, 0, WHITE);
                     this_player->draw();
                     
 
