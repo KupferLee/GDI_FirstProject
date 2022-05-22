@@ -7,6 +7,7 @@
 #include "sprite.h"
 #include "player.h"
 #include "map.h"
+#include "inventory.h"
 
 
 //initialization within main()
@@ -31,11 +32,13 @@ int main() {
     Camera2D* this_camera = new Camera2D;
     map* this_map = new map;
     player* this_player = new player(this_map);
+    inventory* this_inventory = new inventory;
     
     this_camera->target = this_player->position;
     this_camera->offset = Vector2 {Game::ScreenWidth / 2.0f - this_player->texture.width/2, Game::ScreenHeight / 2.0f - this_player->texture.height/2};
     this_camera->zoom = 1.0f;
     this_camera->rotation = 1.0f;
+
 
     int framesCounter = 0;
       
@@ -94,8 +97,17 @@ int main() {
                     currentScreen = ENDING;
                 }
 
-                this_camera->target = this_player->position;
-                this_player->update();
+                if (!this_inventory->visible)
+                {
+                    //TODO: wenn camera nicht border berührt
+                    this_camera->target = this_player->position;
+                    this_player->update();
+                    this_inventory->update();
+
+                    this_inventory->position.x = this_player->position.x;
+                    this_inventory->position.y = this_player->position.y;
+                }
+                
                 
 
             } break;
@@ -146,20 +158,18 @@ int main() {
                 } break;
                 case GAMEPLAY:
                 {
-                    //BeginMode2D(*camera);
                     //Draw Game Screen here
                     //order equals order of layers
+
                     DrawRectangle(0, 0, Game::ScreenWidth, Game::ScreenHeight, YELLOW);
                     DrawText("GAMEPLAY SCREEN", 20, 20, 40, ORANGE);
                     DrawText("PRESS ENTER to JUMP to GAMEPLAY SCREEN", 240, 500, 20, ORANGE);
 
-                  
-
                     BeginMode2D(*this_camera);
                     DrawTexture(this_map->texture, 0, 0, WHITE);
                     this_player->draw();
+                    this_inventory->draw();
                     EndMode2D();
-                    //EndMode2D();
                     
 
                 } break;
@@ -179,6 +189,9 @@ int main() {
     // De-initialization here
     // ...
     // ...
+    this_player->~player();
+    this_map->~map();
+    this_inventory->~inventory();
 
     // Close window and OpenGL context
     CloseWindow();

@@ -14,6 +14,11 @@ public:
 	int movement_speed = 5;
 	int scale_factor = 4;
 
+	bool visible;
+
+	//void update();
+	//void draw();
+
 	//later
 	//hp
 	//attack points

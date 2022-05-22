@@ -3,7 +3,7 @@
 map::map()
 {
 
-	this->image = LoadImage("assets/graphics/map_test.png");
+	this->image = LoadImage("assets/graphics/background/map_test.png");
 	ImageResizeNN(&this->image, this->image.width * 3, this->image.height * 3);
 	this->texture = LoadTextureFromImage(this->image);
 	this->position.x = 0;
