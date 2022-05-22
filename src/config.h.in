@@ -10,5 +10,6 @@ namespace Game {
     inline constexpr int ScreenWidth = 960;
     inline constexpr int ScreenHeight = 540;
 
+    //if this is activated game will start on fullscreen
     //#define GAME_START_FULLSCREEN
 }
